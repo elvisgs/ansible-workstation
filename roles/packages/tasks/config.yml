@@ -1,0 +1,29 @@
+- name: Set common environment variables
+  tags: pkg:env
+  lineinfile:
+    dest: /etc/environment
+    state: present
+    regexp: '^{{ item.var }}'
+    line: '{{ item.var }}={{ item.value }}'
+  loop:
+    - { var: 'EDITOR', value: 'vim' }
+
+- name: Configure gitconfig
+  tags:
+    - pkg:dev
+    - git
+  become_user: '{{ user }}'
+  git_config:
+    name: '{{ item.name }}'
+    value: '{{ item.value }}'
+    scope: global
+  loop: '{{ git_configs }}'
+
+- name: Create SSH key
+  tags: ssh
+  become_user: '{{ user }}'
+  user:
+    name: '{{ user }}'
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_comment: '{{ user }}@{{ ansible_hostname }}'

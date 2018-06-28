@@ -1,0 +1,3 @@
+---
+ohmyzsh_theme: avit
+ohmyzsh_plugins: docker docker-compose dotenv git gitignore mvn npm transfer z

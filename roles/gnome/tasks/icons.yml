@@ -1,0 +1,35 @@
+- name: Add Papirus Icon Theme repo
+  apt_repository:
+    repo: ppa:papirus/papirus
+    state: present
+
+- name: Install Papirus Icon Theme
+  apt:
+    pkg: papirus-icon-theme
+    state: present
+
+- name: Configure Icon Theme
+  become_user: '{{ user }}'
+  dconf:
+    key: '/org/gnome/desktop/interface/icon-theme'
+    value: "'Papirus'"
+    state: present
+
+- name: Add Hardcode-tray repo
+  apt_repository:
+    repo: ppa:andreas-angerer89/sni-qt-patched
+    state: present
+
+- name: Install Hardcode-tray icons fixer
+  apt:
+    pkg:
+      - sni-qt
+      - sni-qt:i386
+      - hardcode-tray
+    state: present
+  register: hardcode_tray_install
+
+- name: Fix hardcoded tray icons
+  become_flags: '-E'
+  command: 'hardcode-tray --apply --conversion-tool RSVGConvert --size 16 --theme Papirus'
+  when: hardcode_tray_install is changed

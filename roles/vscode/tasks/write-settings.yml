@@ -1,0 +1,17 @@
+- name: Create VS Code settings directory
+  become_user: '{{ user }}'
+  file:
+    path: '~{{ user }}/.config/Code/User'
+    state: directory
+    mode: 'u=rwx,go='
+
+- name: Write VS Code settings
+  become_user: '{{ user }}'
+  template:
+    src: '{{ item }}.j2'
+    dest: '~{{ user }}/.config/Code/User/{{ item }}'
+    force: no
+    mode: 'u=rw,go='
+  loop:
+    - settings.json
+    - syncLocalSettings.json

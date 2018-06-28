@@ -1,0 +1,11 @@
+---
+# System optimizer and monitor
+- name: Add Stacer repo
+  apt_repository:
+    repo: ppa:oguzhaninan/stacer
+    state: present
+
+- name: Install Stacer
+  apt:
+    pkg: stacer
+    state: present

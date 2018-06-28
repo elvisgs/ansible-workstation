@@ -1,0 +1,6 @@
+- name: Remove unwanted packages
+  tags: pkg:purge
+  apt:
+    name: '{{ pkg_purge }}'
+    purge: yes
+    state: absent

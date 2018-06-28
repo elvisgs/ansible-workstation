@@ -1,0 +1,16 @@
+- name: Set power button action
+  become_user: '{{ user }}'
+  dconf:
+    key: '/org/gnome/settings-daemon/plugins/power/power-button-action'
+    value: "'suspend'"
+    state: present
+
+- name: Set global shortcuts
+  become_user: '{{ user }}'
+  dconf:
+    key: '/org/gnome/settings-daemon/plugins/media-keys/{{ item.key }}'
+    value: '{{ item.value }}'
+    state: present
+  loop:
+    - { key: 'control-center', value: "'<Super>Pause'" }
+    - { key: 'home', value: "'<Super>e'" }

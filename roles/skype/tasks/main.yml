@@ -1,0 +1,5 @@
+---
+- name: Install skype (snap)
+  command: snap install skype --classic
+  register: skype_install
+  changed_when: skype_install.stdout != ''

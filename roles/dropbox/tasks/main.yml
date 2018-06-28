@@ -1,0 +1,18 @@
+---
+- name: Check if Dropbox is installed
+  command: dpkg-query --show dropbox
+  register: dropbox_check
+  failed_when: dropbox_check.rc > 1
+  changed_when: dropbox_check.rc == 1
+
+- name: Install Dropbox
+  apt:
+    deb: '{{ dropbox_url }}'
+  when: dropbox_url is defined and dropbox_check.rc == 1
+
+- name: Install recommends
+  apt:
+    pkg:
+      - libappindicator1
+      - python-gpg
+    state: present

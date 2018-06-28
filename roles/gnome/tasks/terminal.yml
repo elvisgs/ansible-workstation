@@ -1,0 +1,29 @@
+- name: Configure terminal key bindings
+  become_user: '{{ user }}'
+  dconf:
+    key: '/org/gnome/terminal/legacy/keybindings/{{ item.key }}'
+    value: '{{ item.value }}'
+    state: present
+  loop:
+    - { key: "new-tab", value: "'<Primary>t'" }
+    - { key: "next-tab", value: "'<Primary>Tab'" }
+    - { key: "prev-tab", value: "'<Primary><Shift>Tab'" }
+    - { key: "close-tab", value: "'<Primary>w'" }
+    - { key: "paste", value: "'<Primary>v'" }
+
+- name: Configure terminal profile
+  become_user: '{{ user }}'
+  dconf:
+    key: '/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/{{ item.key }}'
+    value: '{{ item.value }}'
+    state: present
+  loop:
+    - { key: "foreground-color", value: "'rgb(255,255,255)'" }
+    - { key: "visible-name", value: "'{{ user }}'" }
+    - { key: "default-size-columns", value: "120" }
+    - { key: "default-size-rows", value: "30" }
+    - { key: "use-transparent-background", value: "true" }
+    - { key: "use-theme-colors", value: "false" }
+    - { key: "use-theme-transparency", value: "false" }
+    - { key: "background-color", value: "'rgb(0,0,0)'" }
+    - { key: "background-transparency-percent", value: "27" }

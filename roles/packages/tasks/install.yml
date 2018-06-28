@@ -1,0 +1,34 @@
+- name: Install base packages
+  tags: pkg:base
+  apt:
+    name: '{{ pkg_base }}'
+    install_recommends: no
+    state: present
+
+- name: Install dev packages
+  tags: pkg:dev
+  apt:
+    name: '{{ pkg_dev }}'
+    install_recommends: no
+    state: present
+
+- name: Install media packages
+  tags: pkg:media
+  apt:
+    name: '{{ pkg_media }}'
+    install_recommends: no
+    state: present
+
+- name: Install sysAdmin packages
+  tags: pkg:sysadmin
+  apt:
+    name: '{{ pkg_sysadmin }}'
+    install_recommends: no
+    state: present
+
+- name: Install misc packages
+  tags: pkg:misc
+  apt:
+    name: '{{ pkg_misc }}'
+    install_recommends: no
+    state: present

@@ -1,0 +1,5 @@
+---
+- name: Install spotify (snap)
+  command: snap install spotify
+  register: spotify_install
+  changed_when: spotify_install.stdout != ''

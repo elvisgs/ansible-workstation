@@ -1,0 +1,21 @@
+- name: Copy wallpaper files
+  become_user: '{{ user }}'
+  copy:
+    src: '{{ item }}'
+    dest: '{{ home }}/.{{ item }}'
+  loop:
+    - wallpaper.jpg
+    - lockscreen.jpg
+
+- name: Set desktop wallpaper
+  become_user: '{{ user }}'
+  dconf:
+    key: '/org/gnome/desktop/background/picture-uri'
+    value: "'file://{{ home }}/.wallpaper.jpg'"
+
+- name: Set lockscreen background
+  become_user: '{{ user }}'
+  dconf:
+    key: '/org/gnome/desktop/screensaver/picture-uri'
+    value: "'file://{{ home }}/.lockscreen.jpg'"
+

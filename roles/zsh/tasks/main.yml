@@ -1,0 +1,23 @@
+---
+- name: Install zsh
+  apt:
+    pkg: zsh
+    install_recommends: no
+    state: latest
+
+- name: Clone oh-my-zsh
+  become_user: '{{ user }}'
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh
+    dest: '~{{ user }}/.oh-my-zsh'
+
+- name: Create .zshrc
+  become_user: '{{ user }}'
+  template:
+    src: zshrc.j2
+    dest: '~{{ user }}/.zshrc'
+
+- name: Set default shell
+  user:
+    name: '{{ user }}'
+    shell: /bin/zsh

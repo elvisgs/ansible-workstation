@@ -1,0 +1,22 @@
+---
+- name: Install config dependencies
+  apt:
+    pkg:
+      - python-psutil
+      - gnome-shell-extensions
+    state: present
+
+- include: theme.yml
+  tags: gnome:theme
+
+- include: icons.yml
+  tags: gnome:icons
+
+- include: terminal.yml
+  tags: gnome:terminal
+
+- include: wallpapers.yml
+  tags: gnome:wallpapers
+
+- include: misc.yml
+  tags: gnome:misc

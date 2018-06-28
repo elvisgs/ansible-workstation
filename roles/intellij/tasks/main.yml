@@ -1,0 +1,22 @@
+---
+- name: Install IntelliJ (snap)
+  command: snap install intellij-idea-community --classic
+  register: intellij_install
+  changed_when: intellij_install.stdout != ''
+
+- name: Create user options dir
+  become_user: '{{ user }}'
+  file:
+    dest: '{{ home }}/{{ intellij_user_dir }}/config/options'
+    state: directory
+    mode: 'ug=rwx,o=rx'
+
+- name: Copy option files
+  become_user: '{{ user }}'
+  copy:
+    src: '{{ item }}'
+    dest: '{{ home }}/{{ intellij_user_dir }}/config/options/{{ item }}'
+    force: no
+  loop:
+    - colors.scheme.xml
+    - editor.xml

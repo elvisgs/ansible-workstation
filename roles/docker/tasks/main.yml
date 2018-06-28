@@ -1,0 +1,11 @@
+---
+- include: install.yml
+
+- include: install-compose.yml
+  tags: 'docker:compose'
+
+- name: Make sure user is added to docker group
+  user:
+    name: '{{ user }}'
+    groups: docker
+    append: yes

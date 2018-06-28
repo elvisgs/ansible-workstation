@@ -1,0 +1,6 @@
+---
+- include: jdk.yml
+  tags: jdk
+
+- include: maven.yml
+  tags: maven

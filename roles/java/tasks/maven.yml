@@ -1,0 +1,11 @@
+- name: Install Maven
+  apt:
+    pkg: maven
+    state: present
+
+- name: Set $M2_HOME
+  lineinfile:
+    dest: /etc/environment
+    state: present
+    regexp: '^M2_HOME'
+    line: M2_HOME=/usr/share/maven

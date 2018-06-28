@@ -1,0 +1,42 @@
+---
+- name: Ansible Workstation
+  hosts: localhost
+  connection: local
+  become: yes
+
+  pre_tasks:
+    - name: Update repositories
+      apt: update_cache=yes
+      changed_when: false
+
+  roles:
+    - role: packages
+      tags: pkg
+    - role: franz
+      tags: [messaging, franz]
+    - role: skype
+      tags: [messaging, skype]
+    - role: dropbox
+      tags: dropbox
+    - role: vscode
+      tags: [dev, vscode]
+    - role: node
+      tags: [dev, node]
+    - role: java
+      tags: [dev, java]
+    - role: intellij
+      tags: [dev, intellij]
+    - role: docker
+      tags: [dev, docker]
+    - role: virtualbox
+      tags: vbox
+    - role: teamviewer
+      tags: teamviewer
+    - role: stacer
+      tags: stacer
+    - role: zsh
+      tags: zsh
+    - role: spotify
+      tags: spotify
+    - role: gnome
+      tags: gnome

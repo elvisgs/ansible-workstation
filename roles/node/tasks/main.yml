@@ -1,0 +1,6 @@
+---
+# Instala node, npm e yarn
+- name: Install node (snap)
+  command: "snap install node --classic --channel='{{ node_snap_channel }}'"
+  register: node_install
+  changed_when: node_install.stdout != ''

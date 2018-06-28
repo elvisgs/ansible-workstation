@@ -1,0 +1,6 @@
+---
+- include: install.yml
+
+- include: purge.yml
+
+- include: config.yml

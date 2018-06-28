@@ -1,0 +1,47 @@
+---
+pkg_base:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - lsb-release
+  - software-properties-common
+  - systemd
+  - wget
+
+pkg_dev:
+  - build-essential
+  - git
+  - gitk
+  - httpie
+  - libssl-dev
+  - shellcheck
+  - vim
+
+pkg_media:
+  - vlc
+
+pkg_sysadmin:
+  - acl
+  - htop
+  - netcat
+  - remmina
+  - remmina-plugin-rdp
+  - remmina-plugin-vnc
+  - libfreerdp-plugins-standard
+
+pkg_misc:
+  - axel
+  - fonts-firacode
+  - gnome-tweak-tool
+  - unrar
+  - unzip
+  - xclip
+
+pkg_purge:
+  - thunderbird
+  - vim-tiny
+  - ubuntu-web-launchers
+
+git_configs:
+  - { name: 'user.name', value: 'Elvis Guimarães' }
+  - { name: 'user.email', value: 'elvis.gs@gmail.com' }

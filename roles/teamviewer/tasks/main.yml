@@ -1,0 +1,19 @@
+---
+- name: Install apt key
+  apt_key:
+    url: https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc
+    state: present
+
+- name: Install apt repo
+  apt_repository:
+    repo: '{{ item }}'
+    filename: teamviewer
+    state: present
+  loop:
+    - deb http://linux.teamviewer.com/deb stable main
+    - deb http://linux.teamviewer.com/deb preview main
+
+- name: Install TeamViewer
+  apt:
+    pkg: teamviewer
+    state: present

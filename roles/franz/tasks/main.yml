@@ -1,0 +1,11 @@
+---
+- name: Check if Franz is installed
+  command: dpkg-query --show franz
+  register: franz_check
+  failed_when: franz_check.rc > 1
+  changed_when: franz_check.rc == 1
+
+- name: Install Franz
+  apt:
+    deb: '{{ franz_url }}'
+  when: franz_url is defined and franz_check.rc == 1

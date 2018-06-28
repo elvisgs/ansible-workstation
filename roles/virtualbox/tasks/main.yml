@@ -1,0 +1,8 @@
+---
+- name: Install VirtualBox
+  apt:
+    name:
+      - virtualbox
+      - virtualbox-ext-pack
+      - virtualbox-guest-additions-iso
+    state: present
